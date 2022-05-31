@@ -4,7 +4,7 @@ import numpy as np
 
 class _TubeComponent(om.ExplicitComponent):
     '''
-    This Private class preforms the hollow tube optimization calculations
+    This Private class performs the hollow tube optimization calculations
 
     Parameters
     ----------
