@@ -3,6 +3,20 @@ import numpy as np
 
 
 class _TubeComponent(om.ExplicitComponent):
+    '''
+    This Private class preforms the hollow tube optimization calculations
+
+    Parameters
+    ----------
+        axial_force: float
+            Axial Force applied on the Tube Section in Newtons
+        bending_moment: float
+            Bending Moment applied on the Tube Section in Newton Meters
+        thickness_lower_bound: 
+            Minimum Thickness of the Tube Section allowed by the optimizer
+        safety_margin_lower_bound: float
+            Minimum Safety Margin of the Tube Section allowed by the optimizer
+    '''
 
     def __init__(self, axial_force, bending_moment,
                  thickness_lower_bound=1, safety_margin_lower_bound=0):
@@ -73,9 +87,9 @@ class TubeOptimization():
     Parameters
     ----------
         axial_force: float
-            Axial force in N
+            Axial Force applied on the Tube Section in Newtons
         bending_moment: float
-            Bending moment in N*m
+            Bending Moment applied on the Tube Section in Newton Meters
 
     '''
 
@@ -85,6 +99,29 @@ class TubeOptimization():
         self.bending_moment = bending_moment  # N*m
 
     def optimize(self, minimim_safety_margin=0, minimum_thickness=1):
+        '''
+        This function runs the optimization
+
+        Parameters
+        ----------
+            thickness_lower_bound: float
+                Minimum Thickness of the Tube Section allowed by the optimizer
+            safety_margin_lower_bound: float
+                Minimum Safety Margin of the Tube Section allowed by the optimizer
+        Returns
+        -------
+            flag: bool
+                True if the Optimization Converged. False if the optimization
+                Failed to Converge
+            inner_diam: float
+                Optimized Inner Diameter of the Hollow Tube in milimeters
+            outer_diam: float
+                Optimized Outer Diameter of the Hollow Tube in milimeters
+            thickness: float
+                Optimized Thickness of the Hollow Tube in milimeters
+            safety_margins: float
+                Margin of Safety of the tube given the applied forces
+        '''
 
         # Creates Optimization Problem
         problem = om.Problem()
