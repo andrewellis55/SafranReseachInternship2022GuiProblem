@@ -106,8 +106,10 @@ class TubeOptimization():
         ----------
             thickness_lower_bound: float
                 Minimum Thickness of the Tube Section allowed by the optimizer
+                in milimeters
             safety_margin_lower_bound: float
                 Minimum Safety Margin of the Tube Section allowed by the optimizer
+                as a decimal number (i.e. 0.05 = 5%)
         Returns
         -------
             flag: bool
